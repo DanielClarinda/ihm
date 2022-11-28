@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <section class="colunaPrincipal">
+    <header id="divHeader" class="balao">
+      <h1>CONFIGURAÇÕES</h1>
+    </header>
+    
+    <div id="divMaquina" class="balao">
+      <h3 class="subTitulo">MÁQUINA</h3>
+      
+      <div id="divConteudoMaquina" class="tresColunas">
+        <!-- example -->
+        <!-- <button id="0" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 1</button> -->
+        <!-- <button id="1" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 2</button> -->
+        <!-- <button id="2" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 3</button> -->
+        <!-- end example -->
+      </div>
+    </div>
+    
+    <div id="divOutros" class="balao">
+      <h3 class="subTitulo">OUTROS</h3>
+      
+      <div id="divConteudoOutros" class="tresColunas">
+        <!-- example -->
+        <!-- <button id="0" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 1</button> -->
+        <!-- <button id="1" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 2</button> -->
+        <!-- <button id="2" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 3</button> -->
+        <!-- end example -->
+      </div>
+    </div>
+    
+    <div id="divConfiguracoes" class="balao">
+      <div id="divConteudoConfiguracoes">
+        <!-- example -->
+        <h3 class="subTitulo">Config Example</h3>
+        <!-- <p>
+          <label for="contagem">Contagem:</label>
+          <input type="number" name="contagem" id="contagem" value="123" min="0" max="15000"> unidades
+        </p> -->
+        <!-- <p>
+          <label for="contagem">Contagem:</label>
+          <input type="number" name="contagem" id="contagem" value="123" min="0" max="15000"> unidades
+        </p> -->
+        <!-- end example -->
+      </div>
+    </div>
+
+    <nav id="divNavegacao" class="balao">
+      <div id="divConteudoNavegacao" class="tresColunas">
+        <button class="botao btCinza" onclick="goHome()">&#8810 Voltar</button>
+        <button class="botao btCinza" onclick="reset()">Reset</button>
+        <button class="botao btCinza" onclick="save()">Salvar &#8811</button>
+      </div>
+    </nav>
+    
+    <footer id="divFooter" class="balao">by <a href="https://dacla-automacao.github.io/site/" target="_blank">DACLA Automação</a></footer>
+  </section>
+
+  <script src="./main.js"></script>
+</body>
+</html>
