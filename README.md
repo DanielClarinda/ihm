@@ -1,2 +1,2 @@
-# ihm
+# IHM
 HMI for machine
