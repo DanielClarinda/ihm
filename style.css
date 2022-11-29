@@ -4,66 +4,66 @@
 }
 body {
   font-family: sans-serif;
-  background-color: grey;
+  background-color: whitesmoke;
   color: white;
 }
-.colunaPrincipal {
+#iColunaPrincipal {
   max-width: 500px;
   margin: auto;
 }
-.balao {
-  background-color: white;
+.cBalao {
   background-color: #323232;
-  border-radius: 5px;
-  box-shadow: 0 0 5px white;
+  border-radius: 3px;
   margin: 10px;
 }
-header {
+#iHeader {
   text-align: center;
   padding: 1rem;
+  letter-spacing: 3px;
 }
-.subTitulo {
+.cTitulo {
   text-align: center;
   padding: 1rem;
+  letter-spacing: 3px;
 }
-.tresColunas {
+.cTresColunas {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
   padding: 10px;
 }
-.botao {
+.cBotao {
   height: 60px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 3px;
   font-size: 15pt;
   border: none;
 }
-.btAzul {
+.cBotaoAzul {
   flex-basis: 40%;
   flex-grow: 1;
   background-color: #3498DB;
 }
-#divOutros {
+#iOutros {
   margin-bottom: 50px;
 }
-#divConteudoConfiguracoes p {
+#iConteudoConfiguracoes p {
   font-size: 15pt;
   padding: 1rem;
 }
-#divNavegacao {
+#iNavegacao {
   margin-top: 50px;
 }
-.btCinza {
+.cBotaoNavegacao {
   flex-basis: 30%;
   flex-grow: 1;
   background-color: #3498DB;
 }
-footer {
+#iFooter {
   text-align: center;
   padding: 1rem;
 }
-footer a {
+#iFooter a {
   color: inherit;
 }

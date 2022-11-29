@@ -9,60 +9,45 @@
 </head>
 
 <body>
-  <section class="colunaPrincipal">
-    <header id="divHeader" class="balao">
+  <section id="iColunaPrincipal">
+
+    <header id="iHeader" class="cBalao">
       <h1>CONFIGURAÇÕES</h1>
     </header>
     
-    <div id="divMaquina" class="balao">
-      <h3 class="subTitulo">MÁQUINA</h3>
-      
-      <div id="divConteudoMaquina" class="tresColunas">
-        <!-- example -->
-        <!-- <button id="0" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 1</button> -->
-        <!-- <button id="1" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 2</button> -->
-        <!-- <button id="2" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 3</button> -->
-        <!-- end example -->
-      </div>
-    </div>
-    
-    <div id="divOutros" class="balao">
-      <h3 class="subTitulo">OUTROS</h3>
-      
-      <div id="divConteudoOutros" class="tresColunas">
-        <!-- example -->
-        <!-- <button id="0" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 1</button> -->
-        <!-- <button id="1" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 2</button> -->
-        <!-- <button id="2" class="botao btAzul" onclick="acessarConfiguracoes(this.id, this.parentElement.id)">Opção 3</button> -->
-        <!-- end example -->
-      </div>
-    </div>
-    
-    <div id="divConfiguracoes" class="balao">
-      <div id="divConteudoConfiguracoes">
-        <!-- example -->
-        <h3 class="subTitulo">Config Example</h3>
-        <!-- <p>
-          <label for="contagem">Contagem:</label>
-          <input type="number" name="contagem" id="contagem" value="123" min="0" max="15000"> unidades
-        </p> -->
-        <!-- <p>
-          <label for="contagem">Contagem:</label>
-          <input type="number" name="contagem" id="contagem" value="123" min="0" max="15000"> unidades
-        </p> -->
-        <!-- end example -->
-      </div>
-    </div>
+    <section id="iMaquina" class="cBalao">
+      <h3 id="iTituloMaquina" class="cTitulo">MÁQUINA</h3>
 
-    <nav id="divNavegacao" class="balao">
-      <div id="divConteudoNavegacao" class="tresColunas">
-        <button class="botao btCinza" onclick="goHome()">&#8810 Voltar</button>
-        <button class="botao btCinza" onclick="reset()">Reset</button>
-        <button class="botao btCinza" onclick="save()">Salvar &#8811</button>
+      <div id="iConteudoMaquina" class="cTresColunas">
+        <!--  -->
+      </div>
+    </section>
+    
+    <section id="iOutros" class="cBalao">
+      <h3 id="iTituloOutros" class="cTitulo">OUTROS</h3>
+      
+      <div id="iConteudoOutros" class="cTresColunas">
+        <!--  -->
+      </div>
+    </section>
+    
+    <section id="iConfiguracoes" class="cBalao">
+      <h3 id="iTituloConfiguracoes" class="cTitulo"></h3>
+
+      <div id="iConteudoConfiguracoes">
+        <!--  -->
+      </div>
+    </section>
+
+    <nav id="iNavegacao" class="cBalao">
+      <div id="iConteudoNavegacao" class="cTresColunas">
+        <button class="cBotao cBotaoNavegacao" onclick="btGoHome()">&#8810 Voltar</button>
+        <button class="cBotao cBotaoNavegacao" onclick="btReset()">Reset</button>
+        <button class="cBotao cBotaoNavegacao" onclick="btSave()">Salvar &#8811</button>
       </div>
     </nav>
     
-    <footer id="divFooter" class="balao">by <a href="https://dacla-automacao.github.io/site/" target="_blank">DACLA Automação</a></footer>
+    <footer id="iFooter" class="cBalao">by <a href="https://dacla-automacao.github.io/site/" target="_blank">DACLA Automação</a></footer>
   </section>
 
   <script src="./main.js"></script>

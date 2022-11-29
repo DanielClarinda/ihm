@@ -1,122 +1,176 @@
-const dadosMaquina = [
+let dadosMaquina = [
   {
-    nome: "AVANÇA TÁBUA",
-    inputs: ["Tempo Máximo Avança", "Tempo Máximo Recua", "Delay leitura sensor Ótico"]
+    buttonName: "AVANÇA TÁBUA",
+    inputs: ["Tempo Máximo Avança", "Tempo Máximo Recua", "Delay Leitura Sensor Ótico"],
+    minificados: ["teMaAv", "teMaRe", "deLeSeOt"],
+    values: [1000, 2000, 50],
   },
   {
-    nome: "BOMBA",
-    inputs: ["Tempo de Partida"]
+    buttonName: "BOMBA",
+    inputs: ["Tempo de Partida"],
+    minificados: ["tePa"],
+    values: [3000]
   },
   {
-    nome: "CHAVE MOLDE",
-    inputs: ["Tempo para Posição 1", "Tempo para Posição 2", "Tempo para Posição 3"]
+    buttonName: "CHAVE MOLDE",
+    inputs: ["Tempo para Posição 1", "Tempo para Posição 2", "Tempo para Posição 3"],
+    minificados: ["tePo1", "tePo2", "tePo3"],
+    values: [6000, 7000, 8000]
   },
   {
-    nome: "COCHO",
-    inputs: ["Tempo Máximo de Avança", "Tempo Máximo de Recua", "Tempo para Começar a vibrar", "Tempo Vibrando Parado", "Tempo Recuando sem Vibrar", "Tempo Avançanda sem Vibrar"]
+    buttonName: "COCHO",
+    inputs: ["Tempo Máximo Avança", "Tempo Máximo Recua", "Tempo para Começar Vibra", "Tempo Vibrando Parado", "Tempo Recuando sem Vibrar", "Tempo Avançanda sem Vibrar"],
+    minificados: ["teMaAv", "teMaRe", "teCoVi", "teViPa", "teReSeVi", "teAvSeVi"],
+    values: [5000, 6000, 3000, 1500, 3000, 2500]
   },
   {
-    nome: "ESTOQUE",
-    inputs: ["Quantidade"]
+    buttonName: "ESTOQUE",
+    inputs: ["Quantidade"],
+    minificados: ["qtd"],
+    values: [7]
   },
   {
-    nome: "FEMEA",
-    inputs: ["Tempo Máximo Subida", "Tempo Máximo Descida", "Tempo Alívio", "Tempo Afasta", "Tempo Vibra", "Tempo Inércia dos Vibra"]
+    buttonName: "FEMEA",
+    inputs: ["Tempo Máximo Subida", "Tempo Máximo Descida", "Tempo Alívio", "Tempo Afasta", "Tempo Vibra", "Tempo Inércia dos Vibra"],
+    minificados: ["teMaSu", "teMaDe", "teAl", "teAf", "teVi", "teInVi"],
+    values: [3000, 4000, 200, 1000, 7000, 1200]
   },
   {
-    nome: "MACHO",
-    inputs: ["Tempo Máximo Subida", "Tempo Máximo Descida"]
+    buttonName: "MACHO",
+    inputs: ["Tempo Máximo Subida", "Tempo Máximo Descida"],
+    minificados: ["teMaSu", "teMaDe"],
+    values: [4000, 10000]
   }
 ];
 
-const dadosOutros = [
+let dadosOutros = [
   {
-    nome: "ALARME",
-    inputs: ["Lista de Erros"]
+    buttonName: "ALARME",
+    inputs: ["Lista de Erros"],
+    minificados: ["liEr"],
+    values: ["Erro1", "Erro2", "Erro3", "Erro4", "Erro5", "Erro6", "Erro7", "Erro8", "Erro9", "Erro10"]
   },
   {
-    nome: "MEMÓRIA",
-    inputs: ["Contagem"]
+    buttonName: "MEMÓRIA",
+    inputs: ["Contagem"],
+    minificados: ["ctg"],
+    values: [987]
   },
 ];
 
-function debug() {
-  esconderDiv('divHeader')
-  esconderDiv('divMaquina');
-  esconderDiv('divOutros');
-  esconderDiv('divConfiguracoes');
-  esconderDiv('divNavegacao');
-  esconderDiv('divFooter');
-} 
+let historicoDaPaginaConfiguracoes = {
+  idDiv: "",
+  indexBotao: ""
+}
+
+// function debug() {
+//   esconderDiv('iHeader')
+//   esconderDiv('iMaquina');
+//   esconderDiv('iOutros');
+//   esconderDiv('iConfiguracoes');
+//   esconderDiv('iNavegacao');
+//   esconderDiv('iFooter');
+// } 
 // debug();  //Comente para produção
 
 function start() {
-  montarBotoesDiv('divConteudoMaquina');
-  montarBotoesDiv('divConteudoOutros');
-  esconderDiv('divConfiguracoes');
-  esconderDiv('divNavegacao');
-} 
-start();  //comente para debugar
+  montarBotoesDaDiv('iConteudoMaquina');
+  montarBotoesDaDiv('iConteudoOutros');
+  esconderDiv('iConfiguracoes');
+  esconderDiv('iNavegacao');
+} start();
 
-function montarBotoesDiv(div) {
-  const valores = pegarValoresReferenteDiv(div);
-  let htmlBotoes = "";
+function montarBotoesDaDiv(idDiv) {
+  const dados = pegarDadosReferenteADiv(idDiv);
+  let htmlDosBotoes = "";
 
-  valores.forEach((valor, index)=>{
-    htmlBotoes += `<button id="${index}" class="botao btAzul" onclick="vaiParaConfiguracoes(this.parentElement.id, this.id)">${valor.nome}</button>`;
+  dados.forEach((dado, index)=>{
+    htmlDosBotoes += `<button id="${index}" class="cBotao cBotaoAzul" onclick="vaiParaConfiguracoes(this.parentElement.id, this.id)">${dado.buttonName}</button>`;
   });
-
-  document.getElementById(div).innerHTML = htmlBotoes;
+  document.getElementById(idDiv).innerHTML = htmlDosBotoes;
 }
 
-function pegarValoresReferenteDiv(div) {
-  let valores;
-
-  if(div === 'divConteudoMaquina') valores = dadosMaquina;
-  else if(div === 'divConteudoOutros') valores = dadosOutros;
-
-  return valores;
+function pegarDadosReferenteADiv(idDiv) {
+  if(idDiv === 'iConteudoMaquina') return dadosMaquina;
+  else if(idDiv === 'iConteudoOutros') return dadosOutros;
 }
 
-function esconderDiv(div) {
-  document.getElementById(div).style.display = "none";
+function esconderDiv(idDiv) {
+  document.getElementById(idDiv).style.display = "none";
 }
 
-function mostrarDiv(div) {
-  document.getElementById(div).style.display = "";
+function mostrarDiv(idDiv) {
+  document.getElementById(idDiv).style.display = "";
 }
 
-function vaiParaConfiguracoes(dessaDiv, botaoSelecionado) {
-  const valores = pegarValoresReferenteDiv(dessaDiv);
-  let htmlInputs = `<h3 class="subTitulo">${valores[botaoSelecionado].nome}</h3>`;
+function vaiParaConfiguracoes(idDivPai, idBotao) {
+  const dados = pegarDadosReferenteADiv(idDivPai);
+  let htmlInputs = montarHtmlInputs(dados[idBotao]);
 
-  valores[botaoSelecionado].inputs.forEach((input, index)=>{
-    htmlInputs += `
-      <p>
-        <label for="x">${input}</label><br>
-        <input type="number" name="x" id="x" value="123" min="0" max="15000"> ms
-      </p>`
-  });
+  setHistoricoDaPagina(idDivPai, idBotao);
+  document.getElementById('iTituloConfiguracoes').innerHTML = dados[idBotao].buttonName;
+  document.getElementById('iConteudoConfiguracoes').innerHTML = htmlInputs;
+
+  esconderDiv('iMaquina');
+  esconderDiv('iOutros');
+  mostrarDiv('iConfiguracoes');
+  mostrarDiv('iNavegacao');
+}
+
+function setHistoricoDaPagina(div, botao) {
+  historicoDaPaginaConfiguracoes.idDiv = div;
+  historicoDaPaginaConfiguracoes.indexBotao = botao;
+}
+
+function montarHtmlInputs(dado) {
+  let htmlInputs = "";
+  let sufixo = "ms";
+
+  if(dado.buttonName === "MEMÓRIA" || dado.buttonName === "ESTOQUE") sufixo = "tábuas";
   
-  document.getElementById('divConteudoConfiguracoes').innerHTML = htmlInputs;
+  if(dado.buttonName === "ALARME") {
+    let minificado = dado.minificados[0];
+    let input = dado.inputs[0];
+    let valor = "";
 
-  esconderDiv('divMaquina');
-  esconderDiv('divOutros');
-  mostrarDiv('divConfiguracoes');
-  mostrarDiv('divNavegacao');
+    dado.values.forEach((value)=>{
+      valor += value+"\n";
+    });
+    
+    htmlInputs = `
+      <p>
+        <label for="${minificado}">${input}</label><br>
+        <textarea id="${minificado}" name="${minificado}" rows="10" cols="40">${valor}</textarea>
+      </p>`;
+  }
+  else {
+    dado.inputs.forEach((input, index)=>{
+      let minificado = dado.minificados[index];
+      let valor = dado.values[index];
+
+      htmlInputs += `
+        <p>
+          <label for="${minificado}">${input}</label><br>
+          <input type="number" name="${minificado}" id="${minificado}" value="${valor}" min="0" max="15000"> ${sufixo}
+        </p>`;
+    });
+  }
+
+  return htmlInputs;
 }
 
-function goHome() {
-  mostrarDiv('divMaquina');
-  mostrarDiv('divOutros');
+function btGoHome() {
+  mostrarDiv('iMaquina');
+  mostrarDiv('iOutros');
   start();
 }
 
-function reset() {
-
-
-  // document.getElementById('divConteudoConfiguracoes').innerHTML = //novamente o conteudo
+function btReset() {
+  vaiParaConfiguracoes(historicoDaPaginaConfiguracoes.idDiv, historicoDaPaginaConfiguracoes.indexBotao);
 }
 
-function save() {
+function btSave() {
+  // pegar todos os inputs
+  // protocolar
+  // enviar para o clp
 }
