@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurações</title>
-  <link rel="stylesheet" href="./style.css?v=1">
+  <link rel="stylesheet" href="./style.css?v=2">
 </head>
 
 <body>
@@ -17,39 +17,49 @@
     
     <section id="iMaquina" class="cBalao">
       <h3 id="iTituloMaquina" class="cTitulo">MÁQUINA</h3>
-
       <div id="iConteudoMaquina" class="cTresColunas">
-        <!--  -->
       </div>
     </section>
     
     <section id="iOutros" class="cBalao">
       <h3 id="iTituloOutros" class="cTitulo">OUTROS</h3>
-      
       <div id="iConteudoOutros" class="cTresColunas">
-        <!--  -->
       </div>
     </section>
     
     <section id="iConfiguracoes" class="cBalao">
       <h3 id="iTituloConfiguracoes" class="cTitulo"></h3>
-
       <div id="iConteudoConfiguracoes">
-        <!--  -->
       </div>
     </section>
 
     <nav id="iNavegacao" class="cBalao">
       <div id="iConteudoNavegacao" class="cTresColunas">
-        <button class="cBotao cBotaoNavegacao" onclick="btGoHome()">&#8810 Voltar</button>
-        <button class="cBotao cBotaoNavegacao" onclick="btReset()">Reset</button>
-        <button class="cBotao cBotaoNavegacao" onclick="btSave()">Salvar &#8811</button>
+        <button class="cBotao cBotaoNavegacao" onclick="btGoHome()">&#8810 VOLTAR</button>
+        <button class="cBotao cBotaoNavegacao" onclick="btReset()">RESET</button>
+        <button class="cBotao cBotaoNavegacao" onclick="btSave()">SALVAR &#8811</button>
+      </div>
+    </nav>
+
+    <section id="iSenha" class="cBalao">
+      <h3 id="iTituloSenha" class="cTitulo">SENHA</h3>
+      <div id="iConteudoSenha">
+        <input type="password" name="senha" id="senha"><br>
+        <p id="mensagemSenha"></p>
+      </div>
+    </section>
+
+    <nav id="iNavegacao2" class="cBalao">
+      <div id="iConteudoNavegacao2" class="cTresColunas">
+        <button class="cBotao cBotaoNavegacao" onclick="btReset()">&#8810 VOLTAR</button>
+        <button class="cBotao cBotaoNavegacao" onclick="btEnter()">ENTER &#8811</button>
       </div>
     </nav>
     
     <footer id="iFooter" class="cBalao">by <a href="https://dacla-automacao.github.io/site/" target="_blank">DACLA Automação</a></footer>
+
   </section>
 
-  <script src="./main.js?v=1"></script>
+  <script src="./main.js?v=2"></script>
 </body>
 </html>

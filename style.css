@@ -2,30 +2,36 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   font-family: sans-serif;
   background-color: whitesmoke;
   color: white;
 }
+
 #iColunaPrincipal {
   max-width: 500px;
   margin: auto;
 }
+
 .cBalao {
   background-color: #323232;
   border-radius: 3px;
   margin: 10px;
 }
+
 #iHeader {
   text-align: center;
   padding: 1rem;
   letter-spacing: 3px;
 }
+
 .cTitulo {
   text-align: center;
   padding: 1rem;
   letter-spacing: 3px;
 }
+
 .cTresColunas {
   display: flex;
   flex-wrap: wrap;
@@ -45,13 +51,16 @@ body {
   flex-grow: 1;
   background-color: #3498DB;
 }
+
 #iOutros {
   margin-bottom: 50px;
 }
+
 #iConteudoConfiguracoes p {
   font-size: 15pt;
   padding: 1rem;
 }
+
 #iNavegacao {
   margin-top: 50px;
 }
@@ -60,6 +69,18 @@ body {
   flex-grow: 1;
   background-color: #3498DB;
 }
+
+#iSenha {
+  margin-bottom: 50px;
+}
+#iConteudoSenha {
+  text-align: center;
+  padding: 1rem;
+}
+#mensagemSenha {
+  color: red;
+}
+
 #iFooter {
   text-align: center;
   padding: 1rem;

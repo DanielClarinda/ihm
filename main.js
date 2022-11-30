@@ -1,9 +1,12 @@
-let dadosMaquina = [
+// import dbMaquina from './dataBase/dbMaquina.json' assert {type: 'json'};
+// import dbOutros from './dataBase/dbOutros.json' assert {type: 'json'};
+
+const dbMaquina = [
   {
     buttonName: "AVANÇA TÁBUA",
     inputs: ["Tempo Máximo Avança", "Tempo Máximo Recua", "Delay Leitura Sensor Ótico"],
     minificados: ["teMaAv", "teMaRe", "deLeSeOt"],
-    values: [1000, 2000, 50],
+    values: [1000, 2000, 50]
   },
   {
     buttonName: "BOMBA",
@@ -13,7 +16,7 @@ let dadosMaquina = [
   },
   {
     buttonName: "CHAVE MOLDE",
-    inputs: ["Tempo para Posição 1", "Tempo para Posição 2", "Tempo para Posição 3"],
+    inputs: ["Tempo Molde 1", "Tempo Molde 2", "Tempo Molde 3"],
     minificados: ["tePo1", "tePo2", "tePo3"],
     values: [6000, 7000, 8000]
   },
@@ -43,7 +46,7 @@ let dadosMaquina = [
   }
 ];
 
-let dadosOutros = [
+const dbOutros = [
   {
     buttonName: "ALARME",
     inputs: ["Lista de Erros"],
@@ -55,13 +58,19 @@ let dadosOutros = [
     inputs: ["Contagem"],
     minificados: ["ctg"],
     values: [987]
-  },
+  }
 ];
 
-let historicoDaPaginaConfiguracoes = {
+let historicoBotaoClicado = {
   idDiv: "",
   indexBotao: ""
-}
+};
+
+const senha = "Daniel";
+let dadosColetados = {
+  titulo: "",
+  valores: ""
+};
 
 // function debug() {
 //   esconderDiv('iHeader')
@@ -69,30 +78,34 @@ let historicoDaPaginaConfiguracoes = {
 //   esconderDiv('iOutros');
 //   esconderDiv('iConfiguracoes');
 //   esconderDiv('iNavegacao');
+//   // esconderDiv('iNavegacao2');
+//   // esconderDiv('iSenha');
 //   esconderDiv('iFooter');
-// } 
-// debug();  //Comente para produção
+// } debug();  //Comente para produção
 
 function start() {
-  montarBotoesDaDiv('iConteudoMaquina');
-  montarBotoesDaDiv('iConteudoOutros');
+  montarBotoesNaDiv('iConteudoMaquina');
+  montarBotoesNaDiv('iConteudoOutros');
   esconderDiv('iConfiguracoes');
   esconderDiv('iNavegacao');
-} start();
+  esconderDiv('iSenha');
+  esconderDiv('iNavegacao2');
+} 
+start();
 
-function montarBotoesDaDiv(idDiv) {
-  const dados = pegarDadosReferenteADiv(idDiv);
+function montarBotoesNaDiv(idDiv) {
   let htmlDosBotoes = "";
+  const dados = pegarDadosReferenteADiv(idDiv);
 
   dados.forEach((dado, index)=>{
-    htmlDosBotoes += `<button id="${index}" class="cBotao cBotaoAzul" onclick="vaiParaConfiguracoes(this.parentElement.id, this.id)">${dado.buttonName}</button>`;
+    htmlDosBotoes += `<button id="${index}" class="cBotao cBotaoAzul" onclick="acessarConfiguracoes(this.parentElement.id, this.id)">${dado.buttonName}</button>`;
   });
   document.getElementById(idDiv).innerHTML = htmlDosBotoes;
 }
 
 function pegarDadosReferenteADiv(idDiv) {
-  if(idDiv === 'iConteudoMaquina') return dadosMaquina;
-  else if(idDiv === 'iConteudoOutros') return dadosOutros;
+  if(idDiv === 'iConteudoMaquina') return dbMaquina;
+  else if(idDiv === 'iConteudoOutros') return dbOutros;
 }
 
 function esconderDiv(idDiv) {
@@ -103,60 +116,62 @@ function mostrarDiv(idDiv) {
   document.getElementById(idDiv).style.display = "";
 }
 
-function vaiParaConfiguracoes(idDivPai, idBotao) {
+function acessarConfiguracoes(idDivPai, indexBotao) {
   const dados = pegarDadosReferenteADiv(idDivPai);
-  let htmlInputs = montarHtmlInputs(dados[idBotao]);
+  let htmlInputs = montarHtmlInputs(dados[indexBotao]);
 
-  setHistoricoDaPagina(idDivPai, idBotao);
-  document.getElementById('iTituloConfiguracoes').innerHTML = dados[idBotao].buttonName;
+  salvarBotaoClicado(idDivPai, indexBotao);
+  document.getElementById('iTituloConfiguracoes').innerHTML = dados[indexBotao].buttonName;
   document.getElementById('iConteudoConfiguracoes').innerHTML = htmlInputs;
 
   esconderDiv('iMaquina');
   esconderDiv('iOutros');
   mostrarDiv('iConfiguracoes');
   mostrarDiv('iNavegacao');
+  esconderDiv('iSenha');
+  esconderDiv('iNavegacao2');
 }
 
-function setHistoricoDaPagina(div, botao) {
-  historicoDaPaginaConfiguracoes.idDiv = div;
-  historicoDaPaginaConfiguracoes.indexBotao = botao;
-}
-
-function montarHtmlInputs(dado) {
+function montarHtmlInputs(dadosDoBotao) {
   let htmlInputs = "";
   let sufixo = "ms";
+  let minificado = "";
+  let valor = "";
 
-  if(dado.buttonName === "MEMÓRIA" || dado.buttonName === "ESTOQUE") sufixo = "tábuas";
+  if(dadosDoBotao.buttonName === "MEMÓRIA" || dadosDoBotao.buttonName === "ESTOQUE") sufixo = "tábuas";
   
-  if(dado.buttonName === "ALARME") {
-    let minificado = dado.minificados[0];
-    let input = dado.inputs[0];
-    let valor = "";
+  if(dadosDoBotao.buttonName === "ALARME") {
+    minificado = dadosDoBotao.minificados[0];
+    input = dadosDoBotao.inputs[0];
 
-    dado.values.forEach((value)=>{
+    dadosDoBotao.values.forEach((value)=>{
       valor += value+"\n";
     });
     
     htmlInputs = `
       <p>
         <label for="${minificado}">${input}</label><br>
-        <textarea id="${minificado}" name="${minificado}" rows="10" cols="40">${valor}</textarea>
+        <textarea id="${minificado}" name="${minificado}" class="cInputsConfiguracoes" rows="10" cols="40">${valor}</textarea>
       </p>`;
   }
   else {
-    dado.inputs.forEach((input, index)=>{
-      let minificado = dado.minificados[index];
-      let valor = dado.values[index];
+    dadosDoBotao.inputs.forEach((input, index)=>{
+      minificado = dadosDoBotao.minificados[index];
+      valor = dadosDoBotao.values[index];
 
       htmlInputs += `
         <p>
           <label for="${minificado}">${input}</label><br>
-          <input type="number" name="${minificado}" id="${minificado}" value="${valor}" min="0" max="15000"> ${sufixo}
+          <input type="number" id="${minificado}" name="${minificado}" class="cInputsConfiguracoes" value="${valor}" min="0" max="15000"> ${sufixo}
         </p>`;
     });
   }
-
   return htmlInputs;
+}
+
+function salvarBotaoClicado(idDivPai, idBotao) {
+  historicoBotaoClicado.idDiv = idDivPai;
+  historicoBotaoClicado.indexBotao = idBotao;
 }
 
 function btGoHome() {
@@ -166,11 +181,61 @@ function btGoHome() {
 }
 
 function btReset() {
-  vaiParaConfiguracoes(historicoDaPaginaConfiguracoes.idDiv, historicoDaPaginaConfiguracoes.indexBotao);
+  acessarConfiguracoes(historicoBotaoClicado.idDiv, historicoBotaoClicado.indexBotao);
 }
 
 function btSave() {
-  // pegar todos os inputs
-  // protocolar
-  // enviar para o clp
+  const tituloDaDiv = document.getElementById('iTituloConfiguracoes').innerHTML;
+  if(tituloDaDiv === "ALARME" || tituloDaDiv === "ESTOQUE" || tituloDaDiv === "MEMÓRIA") return;
+
+  dadosColetados.titulo = tituloDaDiv;
+  dadosColetados.valores = document.getElementsByClassName('cInputsConfiguracoes');
+
+  esconderDiv('iConfiguracoes');
+  esconderDiv('iNavegacao');
+  mostrarDiv('iSenha');
+  mostrarDiv('iNavegacao2');
+}
+
+function btEnter() {
+  const pass = document.getElementById('senha').value;
+
+  if(pass === "") {
+    document.getElementById('mensagemSenha').innerHTML = "Insira uma senha";
+  }
+  else if(pass !== senha) {
+    document.getElementById('mensagemSenha').innerHTML = "Senha incorreta";
+  }
+  else {
+    document.getElementById('senha').value = "";
+    let protocolo = protocolar(dadosColetados);
+    enviarParaCLP(protocolo);
+    btGoHome();
+  }
+}
+
+function protocolar(dados) {
+  let query = "/setValues?title=";
+  query += limpraString(dados.titulo) + "&";
+
+  for(let i = 0; i < dados.valores.length; i++) {
+    query += dados.valores[i].id + "=";
+    query += dados.valores[i].value;
+
+    if(i < dados.valores.length-1) query += "&";
+  }
+
+  console.log(query);
+  return query;
+}
+
+function limpraString(string) {
+  let stringLimpa = string.replace(/\s+/g, '');
+  stringLimpa = stringLimpa.replace(/[^a-zA-Z0-9 ]/g, "x");
+  stringLimpa = stringLimpa.toLowerCase();
+  return stringLimpa;
+}
+
+function enviarParaCLP() {
+  console.log("Enviando para CLP");
 }
