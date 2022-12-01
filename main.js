@@ -209,6 +209,10 @@ function btSave() {
   mostrarDiv('iNavegacao2');
 }
 
+function btClear() {
+  document.getElementById('senha').value = "";
+}
+
 function btEnter() {
   const pass = document.getElementById('senha').value;
 
