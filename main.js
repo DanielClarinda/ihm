@@ -72,6 +72,17 @@ let dadosColetados = {
   valores: ""
 };
 
+// var input = document.getElementById("myInput");
+
+// input.addEventListener("keypress", function(event) {
+//   if (event.key === "Enter") {
+//     // Cancel the default action, if needed
+//     event.preventDefault();
+//     // Trigger the button element with a click
+//     document.getElementById("btEnter").click();
+//   }
+// });
+
 // function debug() {
 //   esconderDiv('iHeader')
 //   esconderDiv('iMaquina');
@@ -181,6 +192,7 @@ function btGoHome() {
 }
 
 function btReset() {
+  document.getElementById('mensagemSenha').innerHTML = "";
   acessarConfiguracoes(historicoBotaoClicado.idDiv, historicoBotaoClicado.indexBotao);
 }
 
