@@ -2,54 +2,84 @@
   margin: 0;
   padding: 0;
 }
-
 body {
-  font-family: sans-serif;
-  background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
 }
-
-#iColunaPrincipal {
+.coluna {
   max-width: 500px;
   margin: auto;
 }
-
-.cBalao {
+.balao {
   background-color: #323232;
-  margin: 15px;
   border-radius: 10px;
+  margin: 1rem;
 }
-
-#iHeader {
+.center {
   text-align: center;
-  padding: 1rem;
+}
+.space {
   letter-spacing: 3px;
 }
-
-.cTitulo {
-  text-align: center;
+.padding {
   padding: 1rem;
-  letter-spacing: 3px;
 }
-
-.cTresColunas {
+.margin {
+  margin: .5rem;
+}
+.flex {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 5px;
-  padding: 10px;
+  padding: 5px;
 }
-.cBotao {
-  height: 60px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-size: 15pt;
-  border: none;
-}
-.cBotaoAzul {
-  flex-basis: 40%;
-  flex-grow: 1;
+.btAzul {
+  height: 50px;
   background-color: #3498DB;
+  border: none;
+  flex-basis: 30%;
+  flex-grow: 1;
+  cursor: pointer;
+  font-size: 12pt;
+}
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+.red {
+  color: red;
+}
+.inShort {
+  max-width: 80px;
+}
+.textArea {
+  max-width: 100px;
+}
+
+
+
+
+
+.noDecorate {
+  color: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 #iConteudoConfiguracoes p {

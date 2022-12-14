@@ -1,47 +1,44 @@
-// import dbMaquina from './dataBase/dbMaquina.json' assert {type: 'json'};
-// import dbOutros from './dataBase/dbOutros.json' assert {type: 'json'};
-
 const dbMaquina = [
   {
     buttonName: "AVANÇA TÁBUA",
     inputs: ["Tempo Máximo Avança", "Tempo Máximo Recua", "Delay Leitura Sensor Ótico"],
-    minificados: ["teMaAv", "teMaRe", "deLeSeOt"],
+    mini: ["teMaAv", "teMaRe", "deLeSeOt"],
     values: [1000, 2000, 50]
   },
   {
     buttonName: "BOMBA",
     inputs: ["Tempo de Partida"],
-    minificados: ["tePa"],
+    mini: ["tePa"],
     values: [3000]
   },
   {
     buttonName: "CHAVE MOLDE",
     inputs: ["Tempo Molde 1", "Tempo Molde 2", "Tempo Molde 3"],
-    minificados: ["tePo1", "tePo2", "tePo3"],
+    mini: ["tePo1", "tePo2", "tePo3"],
     values: [6000, 7000, 8000]
   },
   {
     buttonName: "COCHO",
     inputs: ["Tempo Máximo Avança", "Tempo Máximo Recua", "Tempo para Começar Vibra", "Tempo Vibrando Parado", "Tempo Recuando sem Vibrar", "Tempo Avançanda sem Vibrar"],
-    minificados: ["teMaAv", "teMaRe", "teCoVi", "teViPa", "teReSeVi", "teAvSeVi"],
+    mini: ["teMaAv", "teMaRe", "teCoVi", "teViPa", "teReSeVi", "teAvSeVi"],
     values: [5000, 6000, 3000, 1500, 3000, 2500]
   },
   {
     buttonName: "ESTOQUE",
     inputs: ["Quantidade"],
-    minificados: ["qtd"],
+    mini: ["qtd"],
     values: [7]
   },
   {
-    buttonName: "FEMEA",
+    buttonName: "FÊMEA",
     inputs: ["Tempo Máximo Subida", "Tempo Máximo Descida", "Tempo Alívio", "Tempo Afasta", "Tempo Vibra", "Tempo Inércia dos Vibra"],
-    minificados: ["teMaSu", "teMaDe", "teAl", "teAf", "teVi", "teInVi"],
+    mini: ["teMaSu", "teMaDe", "teAl", "teAf", "teVi", "teInVi"],
     values: [3000, 4000, 200, 1000, 7000, 1200]
   },
   {
     buttonName: "MACHO",
     inputs: ["Tempo Máximo Subida", "Tempo Máximo Descida"],
-    minificados: ["teMaSu", "teMaDe"],
+    mini: ["teMaSu", "teMaDe"],
     values: [4000, 10000]
   }
 ];
@@ -50,185 +47,229 @@ const dbOutros = [
   {
     buttonName: "ALARME",
     inputs: ["Lista de Erros"],
-    minificados: ["liEr"],
-    values: ["Erro1", "Erro2", "Erro3", "Erro4", "Erro5", "Erro6", "Erro7", "Erro8", "Erro9", "Erro10"]
+    mini: ["liEr"],
+    values: ["Erro-1", "Erro-2", "Erro-3", "Erro-4", "Erro-5", "Erro-6", "Erro-7", "Erro-8", "Erro-9", "Erro-10"]
   },
   {
     buttonName: "MEMÓRIA",
     inputs: ["Contagem"],
-    minificados: ["ctg"],
+    mini: ["ctg"],
     values: [987]
   }
 ];
 
-let historicoBotaoClicado = {
-  idDiv: "",
-  indexBotao: ""
-};
-
-const senha = "Daniel";
-let dadosColetados = {
-  titulo: "",
-  valores: ""
-};
-
-// var input = document.getElementById("myInput");
-
-// input.addEventListener("keypress", function(event) {
-//   if (event.key === "Enter") {
-//     // Cancel the default action, if needed
-//     event.preventDefault();
-//     // Trigger the button element with a click
-//     document.getElementById("btEnter").click();
-//   }
-// });
-
-// function debug() {
-//   esconderDiv('iHeader')
-//   esconderDiv('iMaquina');
-//   esconderDiv('iOutros');
-//   esconderDiv('iConfiguracoes');
-//   esconderDiv('iNavegacao');
-//   // esconderDiv('iNavegacao2');
-//   // esconderDiv('iSenha');
-//   esconderDiv('iFooter');
-// } debug();  //Comente para produção
+let historico;
+const chaveDeAcesso = "Daniel";
 
 function start() {
-  montarBotoesNaDiv('iConteudoMaquina');
-  montarBotoesNaDiv('iConteudoOutros');
-  esconderDiv('iConfiguracoes');
-  esconderDiv('iNavegacao');
-  esconderDiv('iSenha');
-  esconderDiv('iNavegacao2');
-} 
+  montarOpcoes(dbMaquina, 'conteudoMaquina');
+  show('sectionMaquina');
+  montarOpcoes(dbOutros, 'conteudoOutros');
+  show('sectionOutros');
+  hide('sectionAjustes');
+  show('sectionSalvos');
+  hide('sectionSenha');
+  hide('sectionNav');
+}
 start();
 
-function montarBotoesNaDiv(idDiv) {
-  let htmlDosBotoes = "";
-  const dados = pegarDadosReferenteADiv(idDiv);
+function montarOpcoes(db, contentID) {
+  let conteudo = "";
 
-  dados.forEach((dado, index)=>{
-    htmlDosBotoes += `<button id="${index}" class="cBotao cBotaoAzul" onclick="acessarConfiguracoes(this.parentElement.id, this.id)">${dado.buttonName}</button>`;
+  db.forEach((item)=>{
+    conteudo += `<button class="btAzul" onclick="goAjustes(this.innerHTML)">${item.buttonName}</button>`;
   });
-  document.getElementById(idDiv).innerHTML = htmlDosBotoes;
+
+  inserirConteudo(conteudo, contentID);
 }
 
-function pegarDadosReferenteADiv(idDiv) {
-  if(idDiv === 'iConteudoMaquina') return dbMaquina;
-  else if(idDiv === 'iConteudoOutros') return dbOutros;
+function inserirConteudo(content, id) {
+  document.getElementById(id).innerHTML = content;
 }
 
-function esconderDiv(idDiv) {
-  document.getElementById(idDiv).style.display = "none";
+function show(sectionID) {
+  document.getElementById(sectionID).style.display = "";
 }
 
-function mostrarDiv(idDiv) {
-  document.getElementById(idDiv).style.display = "";
+function hide(sectionID) {
+  document.getElementById(sectionID).style.display = "none";
 }
 
-function acessarConfiguracoes(idDivPai, indexBotao) {
-  const dados = pegarDadosReferenteADiv(idDivPai);
-  let htmlInputs = montarHtmlInputs(dados[indexBotao]);
-
-  salvarBotaoClicado(idDivPai, indexBotao);
-  document.getElementById('iTituloConfiguracoes').innerHTML = dados[indexBotao].buttonName;
-  document.getElementById('iConteudoConfiguracoes').innerHTML = htmlInputs;
-
-  esconderDiv('iMaquina');
-  esconderDiv('iOutros');
-  mostrarDiv('iConfiguracoes');
-  mostrarDiv('iNavegacao');
-  esconderDiv('iSenha');
-  esconderDiv('iNavegacao2');
-}
-
-function montarHtmlInputs(dadosDoBotao) {
-  let htmlInputs = "";
-  let sufixo = "ms";
-  let minificado = "";
-  let valor = "";
-
-  if(dadosDoBotao.buttonName === "MEMÓRIA" || dadosDoBotao.buttonName === "ESTOQUE") sufixo = "tábuas";
+function goAjustes(buttonValue) {
+  let configItem;
   
-  if(dadosDoBotao.buttonName === "ALARME") {
-    minificado = dadosDoBotao.minificados[0];
-    input = dadosDoBotao.inputs[0];
+  dbMaquina.forEach((itemDB)=>{
+    if(itemDB.buttonName === buttonValue) {
+      configItem = itemDB;
+    }
+  });
 
-    dadosDoBotao.values.forEach((value)=>{
-      valor += value+"\n";
-    });
-    
-    htmlInputs = `
-      <p>
-        <label for="${minificado}">${input}</label><br>
-        <textarea id="${minificado}" name="${minificado}" class="cInputsConfiguracoes" rows="10" cols="40">${valor}</textarea>
-      </p>`;
+  dbOutros.forEach((itemDB)=>{
+    if(itemDB.buttonName === buttonValue) {
+      configItem = itemDB;
+    }
+  });
+
+  historico = configItem;
+
+  montarAjustes(configItem);
+
+  hide('sectionMaquina');
+  hide('sectionOutros');
+  hide('sectionSalvos');
+  show('sectionAjustes');
+  show('sectionNav');
+}
+
+function montarAjustes(itemDB) {
+  let conteudo = "";
+  const itemName = itemDB.buttonName;
+  let sufixo = getSufixo(itemName);
+
+  document.getElementById('tituloAjustes').innerHTML = itemName;
+
+  itemDB.inputs.forEach((input, i)=>{
+    let mini = itemDB.mini[i];
+
+    conteudo += `<label for="${mini}">${input}:</label>`;
+
+    if(itemName === "ALARME") {
+      conteudo += `<textarea id="${mini}" name="${mini}" class="margin" cols="30" rows="10">`;
+      
+      itemDB.values.forEach((valor, i)=>{
+        conteudo += `${valor}`;
+
+        if(i < itemDB.values.length-1) conteudo += "\n";
+      });
+
+      conteudo += `</textarea>`
+    }
+    else {
+      conteudo += `<input class="margin inShort center" type="number" name="${mini}" id="${mini}" value="${itemDB.values[i]}">${sufixo}<br>`;
+    }
+  });
+
+  if(itemName !== "ESTOQUE" && itemName !== "ALARME" && itemName !== "MEMÓRIA") {
+    conteudo += `<p class="padding center red">Valor máximo 16000ms</p>`;
+  }
+
+  if(itemName === "ESTOQUE" || itemName === "ALARME") {
+    hide('btReset');
+    hide('btAvancar');
+  }
+
+  inserirConteudo(conteudo, 'conteudoAjustes');
+}
+
+function getSufixo(name) {
+  if(name === "ESTOQUE" || name === "MEMÓRIA") return "Tábuas";
+  else if(name === "ALARME") return "";
+  else return "(ms)";
+}
+
+function voltar() {
+  const displayAjuste = document.getElementById('sectionAjustes').style.display;
+  const displaySenha = document.getElementById('sectionSenha').style.display;
+
+  if(displayAjuste !== "none") {
+    show('btReset');
+    show('btAvancar');
+    start();
+  }
+  
+  if(displaySenha !== "none") {
+    hide('sectionSenha');
+    goAjustes(historico.buttonName);
+  }
+}
+
+function reset() {
+  const displayAjuste = document.getElementById('sectionAjustes').style.display;
+  const displaySenha = document.getElementById('sectionSenha').style.display;
+
+  if(displayAjuste !== "none") goAjustes(historico.buttonName);
+
+  if(displaySenha !== "none") {
+    document.getElementById('inSenha').value = "";
+    document.getElementById('senhaIncorreta').innerHTML = "";
+  }
+}
+
+function avancar() {
+  const displayAjuste = document.getElementById('sectionAjustes').style.display;
+  const displaySenha = document.getElementById('sectionSenha').style.display;
+
+  if(displayAjuste !== "none") getValues();
+
+  if(displaySenha !== "none") checkSenha();
+}
+
+function getValues() {
+  const pgAjustes = document.getElementById('sectionAjustes');
+  const titulo = pgAjustes.getElementsByTagName('h3')[0].innerHTML;
+  const listaInputs = pgAjustes.getElementsByTagName('input');
+
+  let ids = [];
+  let values = [];
+
+  for(let i = 0; i < listaInputs.length; i++) {
+    ids[i] = listaInputs[i].id;
+    values[i] = listaInputs[i].value;
+  }
+
+  goSenha();
+}
+
+function goSenha() {
+  hide('sectionAjustes');
+  show('sectionSenha');
+}
+
+function checkSenha() {
+  const senha = document.getElementById('inSenha').value;
+
+  if(senha === "") {
+    document.getElementById('senhaIncorreta').innerHTML = "Insira uma Senha";
+    show('senhaIncorreta');
+  }
+  else if(senha === chaveDeAcesso) {
+    document.getElementById('inSenha').value = "";
+    document.getElementById('senhaIncorreta').innerHTML = "";
+    start();
   }
   else {
-    dadosDoBotao.inputs.forEach((input, index)=>{
-      minificado = dadosDoBotao.minificados[index];
-      valor = dadosDoBotao.values[index];
-
-      htmlInputs += `
-        <p>
-          <label for="${minificado}">${input}</label><br>
-          <input type="number" id="${minificado}" name="${minificado}" class="cInputsConfiguracoes" value="${valor}" min="0" max="15000"> ${sufixo}
-        </p>`;
-    });
-  }
-  return htmlInputs;
-}
-
-function salvarBotaoClicado(idDivPai, idBotao) {
-  historicoBotaoClicado.idDiv = idDivPai;
-  historicoBotaoClicado.indexBotao = idBotao;
-}
-
-function btGoHome() {
-  mostrarDiv('iMaquina');
-  mostrarDiv('iOutros');
-  start();
-}
-
-function btReset() {
-  document.getElementById('mensagemSenha').innerHTML = "";
-  acessarConfiguracoes(historicoBotaoClicado.idDiv, historicoBotaoClicado.indexBotao);
-}
-
-function btSave() {
-  const tituloDaDiv = document.getElementById('iTituloConfiguracoes').innerHTML;
-  if(tituloDaDiv === "ALARME" || tituloDaDiv === "ESTOQUE" || tituloDaDiv === "MEMÓRIA") return;
-
-  dadosColetados.titulo = tituloDaDiv;
-  dadosColetados.valores = document.getElementsByClassName('cInputsConfiguracoes');
-
-  esconderDiv('iConfiguracoes');
-  esconderDiv('iNavegacao');
-  mostrarDiv('iSenha');
-  mostrarDiv('iNavegacao2');
-}
-
-function btClear() {
-  document.getElementById('senha').value = "";
-}
-
-function btEnter() {
-  const pass = document.getElementById('senha').value;
-
-  if(pass === "") {
-    document.getElementById('mensagemSenha').innerHTML = "Insira uma senha";
-  }
-  else if(pass !== senha) {
-    document.getElementById('mensagemSenha').innerHTML = "Senha incorreta";
-  }
-  else {
-    document.getElementById('senha').value = "";
-    let protocolo = protocolar(dadosColetados);
-    enviarParaCLP(protocolo);
-    btGoHome();
+    document.getElementById('senhaIncorreta').innerHTML = "Senha Incorreta"
+    show('senhaIncorreta');
   }
 }
+
+
+
+
+
+
+
+
+
+function goPerfil() {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function protocolar(dados) {
   let query = "/setValues?title=";

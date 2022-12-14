@@ -5,62 +5,77 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurações</title>
-  <link rel="stylesheet" href="./style.css?v=4">
+  <link rel="stylesheet" href="./style.css?v=5">
 </head>
 
 <body>
-  <section id="iColunaPrincipal">
+  <div class="coluna">
 
-    <header id="iHeader" class="cBalao">
-      <h1>CONFIGURAÇÕES</h1>
+    <header class="balao">
+      <h2 class="center padding space">CONFIGURAÇÕES</h2>
     </header>
     
-    <section id="iMaquina" class="cBalao">
-      <h3 id="iTituloMaquina" class="cTitulo">MÁQUINA</h3>
-      <div id="iConteudoMaquina" class="cTresColunas">
+    <section id="sectionMaquina" class="balao">
+      <h3 id="tituloMaquina" class="center padding space">MÁQUINA</h3>
+      <div id="conteudoMaquina" class="flex">
+        <!-- exemplo -->
+        <!-- <button class="btAzul" onclick="goAjustes(this)">AVANÇA TÁBUA</button>
+        <button class="btAzul" onclick="goAjustes(this)">BOMBA</button>
+        <button class="btAzul" onclick="goAjustes(this)">FEMEA</button> -->
       </div>
     </section>
     
-    <section id="iOutros" class="cBalao">
-      <h3 id="iTituloOutros" class="cTitulo">OUTROS</h3>
-      <div id="iConteudoOutros" class="cTresColunas">
-      </div>
-    </section>
-    
-    <section id="iConfiguracoes" class="cBalao">
-      <h3 id="iTituloConfiguracoes" class="cTitulo"></h3>
-      <div id="iConteudoConfiguracoes">
+    <section id="sectionOutros" class="balao">
+      <h3 id="tituloOutros" class="center padding space">OUTROS</h3>
+      <div id="conteudoOutros" class="flex">
+        <!-- exemplo -->
+        <!-- <button class="btAzul" onclick="goAjustes(this)">ALARME</button>
+        <button class="btAzul" onclick="goAjustes(this)">MEMÓRIA</button> -->
       </div>
     </section>
 
-    <nav id="iNavegacao" class="cBalao">
-      <div id="iConteudoNavegacao" class="cTresColunas">
-        <button class="cBotao cBotaoNavegacao" onclick="btGoHome()">&#8810 VOLTAR</button>
-        <button class="cBotao cBotaoNavegacao" onclick="btReset()">RESET</button>
-        <button class="cBotao cBotaoNavegacao" onclick="btSave()">SALVAR &#8811</button>
+    <section id="sectionSalvos" class="balao">
+      <h3 id="tituloSalvos" class="center padding space" >SALVOS</h3>
+      <div id="conteudoSalvos" class="flex">
+        <!-- exemplo -->
+        <button class="btAzul" onclick="goPerfil(this)">PERFIL 1</button>
+        <button class="btAzul" onclick="goPerfil(this)">PERFIL 2</button>
       </div>
+    </section>
+    
+    <section id="sectionAjustes" class="balao">
+      <h3 id="tituloAjustes" class="center padding space">AJUSTES</h3>
+      <div id="conteudoAjustes" class="right padding">
+        <!-- exemplo -->
+        <!-- <label for="input1">Input1:</label>
+        <input class="margin" type="number" name="input1" id="input1">
+        <br>
+        <label for="input1">Input1:</label>
+        <input class="margin" type="number" name="input1" id="input1">
+        <br>
+        <label for="input1">Input1:</label>
+        <input class="margin" type="number" name="input1" id="input1"> -->
+      </div>
+    </section>
+    
+    <section id="sectionSenha" class="balao">
+      <h3 id="tituloSenha" class="center padding space">SENHA</h3>
+      <div id="conteudoSenha" class="center">
+        <input type="password" name="inSenha" id="inSenha"><br>
+        <p id="senhaIncorreta" class="padding red"></p>
+      </div>
+    </section>
+
+    <nav id="sectionNav" class="balao flex">
+      <button id="btVoltar" class="btAzul" onclick="voltar()">&#8810 VOLTAR</button>
+      <button id="btReset" class="btAzul" onclick="reset()">RESET</button>
+      <button id="btAvancar" class="btAzul" onclick="avancar()">AVANÇAR &#8811</button>
     </nav>
-
-    <section id="iSenha" class="cBalao">
-      <h3 id="iTituloSenha" class="cTitulo">SENHA</h3>
-      <div id="iConteudoSenha">
-        <input type="password" name="senha" id="senha"><br>
-        <p id="mensagemSenha"></p>
-      </div>
-    </section>
-
-    <nav id="iNavegacao2" class="cBalao">
-      <div id="iConteudoNavegacao2" class="cTresColunas">
-        <button class="cBotao cBotaoNavegacao" onclick="btReset()">&#8810 RESET</button>
-        <button class="cBotao cBotaoNavegacao" onclick="btClear()">LIMPAR</button>
-        <button class="cBotao cBotaoNavegacao" onclick="btEnter()">ENTER &#8811</button>
-      </div>
-    </nav>
     
-    <footer id="iFooter" class="cBalao">by <a href="https://dacla-automacao.github.io/site/" target="_blank">DACLA Automação</a></footer>
+    <footer class="balao center padding">by <a class="noDecorate" href="https://dacla-automacao.github.io/site/" target="_blank">DACLA Automação</a></footer>
 
-  </section>
+  </div>
 
-  <script src="./main.js?v=4"></script>
+  <script src="./main.js?v=5"></script>
 </body>
 </html>

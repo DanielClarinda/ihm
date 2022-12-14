@@ -1,2 +1,0 @@
-# IHM
-HMI for machine
