@@ -121,6 +121,8 @@ function goAjustes(nomeBotao) {
   hide('sectionSalvos');
   show('sectionAjustes');
   show('sectionNav');
+
+  saveHistorico('sectionAjustes');
 }
 
 function saveHistorico(section) {
@@ -186,7 +188,7 @@ function voltar() {
   
   if(displaySenha !== "none") {
     if(historicoSection.id === "sectionAjustes") {
-      goHistoricoAjustes();
+      show('sectionAjustes');
       hide('sectionSenha');
     }
     else if(historicoSection.id === "sectionDadosSalvo") {
@@ -198,19 +200,13 @@ function voltar() {
   if(displayDadosSalvo !== "none") start();
 }
 
-function goHistoricoAjustes() {
-  const conteudo = historicoSection.innerHTML;
-  document.getElementById('sectionAjustes').innerHTML = conteudo;
-  show('sectionAjustes');
-}
-
 function reset() {
   const displayAjuste = document.getElementById('sectionAjustes').style.display;
   const displaySenha = document.getElementById('sectionSenha').style.display;
 
   if(displayAjuste !== "none") {
-    const historicoTitulo = historicoSection.getElementsByTagName('h3')[0];
-    goAjustes(historicoTitulo.innerHTML);
+    const historicoTitulo = historicoSection.getElementsByTagName('h3')[0].innerHTML;
+    goAjustes(historicoTitulo);
   }
 
   if(displaySenha !== "none") {
@@ -225,9 +221,9 @@ function avancar() {
   const displayDadosSalvo = document.getElementById('sectionDadosSalvo').style.display;
 
   if(displayAjuste !== "none") {
-    saveHistorico('sectionAjustes');
     getValues();
-    goSenha();
+    hide('sectionAjustes');
+    show('sectionSenha');
   }
 
   if(displaySenha !== "none") checkSenha();
@@ -236,7 +232,7 @@ function avancar() {
     saveHistorico('sectionDadosSalvo');
     hide('sectionDadosSalvo');
     show('btReset');
-    goSenha();
+    show('sectionSenha');
   }
 }
 
@@ -252,11 +248,6 @@ function getValues() {
 //     ids[i] = listaInputs[i].id;
 //     values[i] = listaInputs[i].value;
 //   }
-}
-
-function goSenha() {
-  hide('sectionAjustes');
-  show('sectionSenha');
 }
 
 function checkSenha() {
