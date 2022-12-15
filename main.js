@@ -58,7 +58,10 @@ const dbOutros = [
   }
 ];
 
-let historico;
+// let historico;
+// let historicoDadosSaldo;
+
+let historicoSection;
 const chaveDeAcesso = "Daniel";
 
 function start() {
@@ -68,6 +71,7 @@ function start() {
   show('sectionOutros');
   hide('sectionAjustes');
   show('sectionSalvos');
+  hide('sectionDadosSalvo');
   hide('sectionSenha');
   hide('sectionNav');
 }
@@ -95,22 +99,20 @@ function hide(sectionID) {
   document.getElementById(sectionID).style.display = "none";
 }
 
-function goAjustes(buttonValue) {
+function goAjustes(nomeBotao) {
   let configItem;
   
   dbMaquina.forEach((itemDB)=>{
-    if(itemDB.buttonName === buttonValue) {
+    if(itemDB.buttonName === nomeBotao) {
       configItem = itemDB;
     }
   });
 
   dbOutros.forEach((itemDB)=>{
-    if(itemDB.buttonName === buttonValue) {
+    if(itemDB.buttonName === nomeBotao) {
       configItem = itemDB;
     }
   });
-
-  historico = configItem;
 
   montarAjustes(configItem);
 
@@ -119,6 +121,10 @@ function goAjustes(buttonValue) {
   hide('sectionSalvos');
   show('sectionAjustes');
   show('sectionNav');
+}
+
+function saveHistorico(section) {
+  historicoSection = document.getElementById(section);
 }
 
 function montarAjustes(itemDB) {
@@ -170,6 +176,7 @@ function getSufixo(name) {
 function voltar() {
   const displayAjuste = document.getElementById('sectionAjustes').style.display;
   const displaySenha = document.getElementById('sectionSenha').style.display;
+  const displayDadosSalvo = document.getElementById('sectionDadosSalvo').style.display;
 
   if(displayAjuste !== "none") {
     show('btReset');
@@ -178,16 +185,33 @@ function voltar() {
   }
   
   if(displaySenha !== "none") {
-    hide('sectionSenha');
-    goAjustes(historico.buttonName);
+    if(historicoSection.id === "sectionAjustes") {
+      goHistoricoAjustes();
+      hide('sectionSenha');
+    }
+    else if(historicoSection.id === "sectionDadosSalvo") {
+      goDadosSalvo(historicoSection.getElementsByTagName('h3')[0]);
+      hide('sectionSenha');
+    }
   }
+
+  if(displayDadosSalvo !== "none") start();
+}
+
+function goHistoricoAjustes() {
+  const conteudo = historicoSection.innerHTML;
+  document.getElementById('sectionAjustes').innerHTML = conteudo;
+  show('sectionAjustes');
 }
 
 function reset() {
   const displayAjuste = document.getElementById('sectionAjustes').style.display;
   const displaySenha = document.getElementById('sectionSenha').style.display;
 
-  if(displayAjuste !== "none") goAjustes(historico.buttonName);
+  if(displayAjuste !== "none") {
+    const historicoTitulo = historicoSection.getElementsByTagName('h3')[0];
+    goAjustes(historicoTitulo.innerHTML);
+  }
 
   if(displaySenha !== "none") {
     document.getElementById('inSenha').value = "";
@@ -198,26 +222,36 @@ function reset() {
 function avancar() {
   const displayAjuste = document.getElementById('sectionAjustes').style.display;
   const displaySenha = document.getElementById('sectionSenha').style.display;
+  const displayDadosSalvo = document.getElementById('sectionDadosSalvo').style.display;
 
-  if(displayAjuste !== "none") getValues();
+  if(displayAjuste !== "none") {
+    saveHistorico('sectionAjustes');
+    getValues();
+    goSenha();
+  }
 
   if(displaySenha !== "none") checkSenha();
+
+  if(displayDadosSalvo !== "none") {
+    saveHistorico('sectionDadosSalvo');
+    hide('sectionDadosSalvo');
+    show('btReset');
+    goSenha();
+  }
 }
 
 function getValues() {
-  const pgAjustes = document.getElementById('sectionAjustes');
-  const titulo = pgAjustes.getElementsByTagName('h3')[0].innerHTML;
-  const listaInputs = pgAjustes.getElementsByTagName('input');
+//   const pgAjustes = document.getElementById('sectionAjustes');
+//   const titulo = pgAjustes.getElementsByTagName('h3')[0].innerHTML;
+//   const listaInputs = pgAjustes.getElementsByTagName('input');
 
-  let ids = [];
-  let values = [];
+//   let ids = [];
+//   let values = [];
 
-  for(let i = 0; i < listaInputs.length; i++) {
-    ids[i] = listaInputs[i].id;
-    values[i] = listaInputs[i].value;
-  }
-
-  goSenha();
+//   for(let i = 0; i < listaInputs.length; i++) {
+//     ids[i] = listaInputs[i].id;
+//     values[i] = listaInputs[i].value;
+//   }
 }
 
 function goSenha() {
@@ -243,16 +277,35 @@ function checkSenha() {
   }
 }
 
+function goDadosSalvo(bt) {
+  montarPerfil(bt);
 
+  hide('sectionMaquina');
+  hide('sectionOutros');
+  hide('sectionSalvos');
+  show('sectionDadosSalvo');
+  hide('btReset');
+  show('sectionNav');
+}
 
+function montarPerfil(bt) {
+  document.getElementById('tituloDadosSalvo').innerHTML = bt.innerHTML;
 
+  let conteudo = "";
 
+  dbMaquina.forEach((item)=>{
+    conteudo += `<p class="left">${item.buttonName}</p>`;
 
+    item.inputs.forEach((input, i)=>{
+      conteudo += `
+        <label for="${i}">${input}:</label>
+        <input class="margin inShort center" type="number" name="${i}" id="${i}" value="${item.values[i]}" disabled>(ms)<br>`;
+    });
 
+    conteudo += `<br><br>`;
+  });
 
-
-function goPerfil() {
-
+  document.getElementById('conteudoDadosSalvo').innerHTML = conteudo;
 }
 
 
