@@ -38,10 +38,16 @@ body {
   height: 50px;
   background-color: #3498DB;
   border: none;
-  flex-basis: 30%;
-  flex-grow: 1;
   cursor: pointer;
   font-size: 12pt;
+}
+.doisBT {
+  flex-basis: 45%;
+  flex-grow: 1;
+}
+.tresBT {
+  flex-basis: 30%;
+  flex-grow: 1;
 }
 .right {
   text-align: right;
@@ -55,57 +61,6 @@ body {
 .inShort {
   max-width: 80px;
 }
-.textArea {
-  max-width: 100px;
-}
-
-
-
-
-
 .noDecorate {
-  color: inherit;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-#iConteudoConfiguracoes p {
-  font-size: 15pt;
-  padding: 1rem;
-}
-
-.cBotaoNavegacao {
-  flex-basis: 30%;
-  flex-grow: 1;
-  background-color: #3498DB;
-}
-
-#iConteudoSenha {
-  text-align: center;
-  padding: 1rem;
-}
-#mensagemSenha {
-  padding: .8rem;
-  color: red;
-}
-
-#iFooter {
-  text-align: center;
-  padding: 1rem;
-}
-#iFooter a {
   color: inherit;
 }

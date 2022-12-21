@@ -12,64 +12,77 @@
   <div class="coluna">
 
     <header class="balao">
-      <h2 class="center padding space">CONFIGURAÇÕES</h2>
+      <h2 class="center space padding">CONFIGURAÇÕES</h2>
     </header>
+
+    <section id="sectionNome" class="balao">
+      <h3 id="tituloNome" class="center padding space"></h3>
+      <div id="conteudoNome" class="flex">
+        <button class="btAzul doisBT" onclick="vaiParaPaginaAlterarNome()">ALTERAR NOME</button>
+      </div>
+    </section>
+
+    <section id="sectionAlterarNome" class="balao">
+      <h3 id="tituloAlterarNome" class="center padding space"></h3>
+      <div class="padding center">
+        <input class="center" type="text" id="inAlterarNome">
+      </div>
+    </section>
     
     <section id="sectionMaquina" class="balao">
-      <h3 id="tituloMaquina" class="center padding space">MÁQUINA</h3>
+      <h3 class="center padding space">MÁQUINA</h3>
       <div id="conteudoMaquina" class="flex">
-        <!-- exemplo -->
       </div>
     </section>
     
     <section id="sectionOutros" class="balao">
-      <h3 id="tituloOutros" class="center padding space">OUTROS</h3>
+      <h3 class="center padding space">OUTROS</h3>
       <div id="conteudoOutros" class="flex">
-        <!-- exemplo -->
+      </div>
+    </section>
+
+    <section id="sectionAjustes" class="balao">
+      <h3 id="tituloAjustes" class="center padding space"></h3>
+      <div id="conteudoAjustes" class="right padding">
       </div>
     </section>
 
     <section id="sectionSalvos" class="balao">
-      <h3 id="tituloSalvos" class="center padding space" >SALVOS</h3>
+      <h3 class="center padding space" >SALVOS</h3>
       <div id="conteudoSalvos" class="flex">
-        <!-- exemplo -->
-        <button class="btAzul" onclick="goDadosSalvo(this)">PERFIL 1</button>
-        <button class="btAzul" onclick="goDadosSalvo(this)">PERFIL 2</button>
       </div>
     </section>
 
-    <section id="sectionDadosSalvo" class="balao">
-      <h3 id="tituloDadosSalvo" class="center padding space" ></h3>
-      <div id="conteudoDadosSalvo" class="right padding">
-        <!-- exemplo -->
-      </div>
-    </section>
-    
-    <section id="sectionAjustes" class="balao">
-      <h3 id="tituloAjustes" class="center padding space">AJUSTES</h3>
-      <div id="conteudoAjustes" class="right padding">
-        <!-- exemplo -->
+    <section id="sectionDadosPerfil" class="balao">
+      <h3 id="tituloDadosPerfil" class="center padding space"></h3>
+      <div id="conteudoDadosPerfil" class="right padding">
       </div>
     </section>
     
     <section id="sectionSenha" class="balao">
-      <h3 id="tituloSenha" class="center padding space">SENHA</h3>
-      <div id="conteudoSenha" class="center">
-        <input type="password" name="inSenha" id="inSenha"><br>
+      <h3 class="center padding space">SENHA</h3>
+      <div class="center">
+        <input type="password" id="inSenha"><br>
         <p id="senhaIncorreta" class="padding red"></p>
       </div>
     </section>
 
     <nav id="sectionNav" class="balao flex">
-      <button id="btVoltar" class="btAzul" onclick="voltar()">&#8810 VOLTAR</button>
-      <button id="btReset" class="btAzul" onclick="reset()">RESET</button>
-      <button id="btAvancar" class="btAzul" onclick="avancar()">AVANÇAR &#8811</button>
+      <button id="btVoltar" class="btAzul tresBT" onclick="voltar()">&#8810 VOLTAR</button>
+      <button id="btReset" class="btAzul tresBT" onclick="reset()">RESET</button>
+      <button id="btAvancar" class="btAzul tresBT" onclick="avancar()">AVANÇAR &#8811</button>
     </nav>
     
     <footer class="balao center padding">by <a class="noDecorate" href="https://dacla-automacao.github.io/site/" target="_blank">DACLA Automação</a></footer>
 
   </div>
 
+  <script src="./pgAlterarNome.js"></script>
+  <script src="./pgSenha.js"></script>
+  <script src="./pgDadosPerfil.js"></script>
+  <script src="./nav.js"></script>
+  <script src="./pgAjustes.js"></script>
+  <script src="./db.js"></script>
   <script src="./main.js?v=6"></script>
 </body>
 </html>
